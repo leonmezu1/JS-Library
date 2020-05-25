@@ -8,9 +8,7 @@ const jumbotron = document.getElementById('emptyLibrary')
 const displayLibrary = document.getElementById('displayLibrary')
 
 
-
 // Add event
-
 bForm.addEventListener('submit', addBookToLibrary)
 document.addEventListener("DOMContentLoaded", renderLibrary(myLibrary))
 
@@ -104,6 +102,7 @@ function clickReadBtn() {
     })
 }
 
+// Delete a book from the library
 function clickTrashBtn() {
     Array.prototype.forEach.call(trashBtns, function (element) {
         element.addEventListener('click', function () {
@@ -112,4 +111,25 @@ function clickTrashBtn() {
             renderLibrary(myLibrary)
         })
     })
+}
+
+
+function myLibraryLocalStorage(myLibrary) {
+  myLibrary = getMyLibraryLocalStorage()
+  myLibrary = push(book)
+  localStorage.setItem('myLibrary', JSON.stringify(myLibrary))
+}
+
+function getMyLibraryLocalStorage() {
+  if (localStorage.getItem('myLibrary') === null) {
+    myLibrary = [];
+  } else {
+    myLibrary = JSON.parse(localStorage.getItem('myLibrary'))
+  }
+
+  return myLibrary
+}
+
+function deleteMyLibraryLocalStorage () {
+
 }
