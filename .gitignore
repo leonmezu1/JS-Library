@@ -102,3 +102,8 @@ dist
 
 # TernJS port file
 .tern-port
+
+# pug history and pug files
+
+index.pug*
+.history/
