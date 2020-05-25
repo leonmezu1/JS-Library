@@ -11,12 +11,13 @@ document.addEventListener("DOMContentLoaded", renderLibrary(myLibrary))
 
 
 class Book {
-    constructor(bTitle, bDescription, bNumber, bAuthor, bGenre) {
+    constructor(bTitle, bDescription, bNumber, bAuthor, bGenre, bStatus) {
         this.bTitle = bTitle
         this.bDescription = bDescription
         this.bNumber = bNumber
         this.bAuthor = bAuthor
         this.bGenre = bGenre
+        this.bStatus = bStatus
     }
 }
 
@@ -29,8 +30,9 @@ function addBookToLibrary(e) {
     const bNumber = document.getElementById('bNumber').value
     const bAuthor = document.getElementById('bAuthor').value
     const bGenre = document.getElementById('bGenre').value
+    const bStatus = document.getElementById('bStatus').value
 
-    let book = new Book(bTitle, bDescription, bNumber, bAuthor, bGenre)
+    let book = new Book(bTitle, bDescription, bNumber, bAuthor, bGenre, bStatus)
 
     myLibrary.push(book)
     renderLibrary(myLibrary)
@@ -50,6 +52,7 @@ function renderLibrary(myLibrary) {
                 <td>${book.bNumber}</td>
                 <td>${book.bAuthor}</td>
                 <td>${book.bGenre}</td>
+                <td>${book.bStatus}</td>
             </tr>
             `
             tableBody.innerHTML += template
