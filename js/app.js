@@ -1,12 +1,9 @@
 // variables
-var myLibrary = []
-var readBtns = document.getElementsByClassName('read-btn')
-var trashBtns = document.getElementsByClassName('fa-trash-alt')
+var myLibrary = getMyLibraryLS()
 const bForm = document.getElementById('bForm')
 const tableBody = document.getElementById('tableBody')
 const jumbotron = document.getElementById('emptyLibrary')
 const displayLibrary = document.getElementById('displayLibrary')
-
 
 // Add event
 bForm.addEventListener('submit', addBookToLibrary)
@@ -36,16 +33,11 @@ function addBookToLibrary(e) {
     let bStatus = document.getElementById('bStatus').checked
     bStatus === true ? bStatus = 'Read' : bStatus = 'Not read'
     let book = new Book(bTitle, bDescription, bNumber, bAuthor, bGenre, bStatus)
-
     myLibrary.push(book)
     renderLibrary(myLibrary)
-
-    clickReadBtn()
-    clickTrashBtn()
+    updateMyLibraryLS(myLibrary)
     //Jquery for modal
     $('#bAddBook').modal('toggle');
-    // return false;
-
 }
 
 // Render the submit book to view
@@ -64,12 +56,14 @@ function renderLibrary(myLibrary) {
                 <td>${book.bAuthor}</td>
                 <td>${book.bGenre}</td>
                 <td><button type="button" class="btn btn-outline-primary read-btn" data-btn="${index}">${book.bStatus}</button></td>
-                <td><i class="fas fa-trash-alt text-center" data-trash="${index}"></i></td>
+                <td align='center'><a href="#"><i class="fas fa-trash-alt" data-trash="${index}"></i></a></td>
             </tr>
             `
             tableBody.innerHTML += template
         }))
     }
+    clickReadBtn()
+    clickTrashBtn()
 }
 
 // Empty library
@@ -89,6 +83,7 @@ function emptyLibrary() {
 
 // Read toggle
 function clickReadBtn() {
+    let readBtns = document.getElementsByClassName('read-btn')
     Array.prototype.forEach.call(readBtns, function (element) {
         element.addEventListener('click', function () {
             if (element.innerHTML === 'Read')  {
@@ -98,38 +93,37 @@ function clickReadBtn() {
                 myLibrary[element.dataset.btn].bStatus = 'Read'
                 element.innerHTML = 'Read'
             }
+            updateMyLibraryLS(myLibrary)
+            renderLibrary(myLibrary)
         })
     })
 }
 
 // Delete a book from the library
 function clickTrashBtn() {
+    let trashBtns = document.getElementsByClassName('fa-trash-alt')
     Array.prototype.forEach.call(trashBtns, function (element) {
         element.addEventListener('click', function () {
             myLibrary.splice(element.dataset.trash, 1)
-            console.log(myLibrary)
+            updateMyLibraryLS(myLibrary)
             renderLibrary(myLibrary)
         })
     })
 }
 
 
-function myLibraryLocalStorage(myLibrary) {
-  myLibrary = getMyLibraryLocalStorage()
-  myLibrary = push(book)
+function updateMyLibraryLS(myLibrary) {
+  localStorage.setItem('myLibrary', JSON.stringify([]))
   localStorage.setItem('myLibrary', JSON.stringify(myLibrary))
 }
 
-function getMyLibraryLocalStorage() {
+function getMyLibraryLS() {
   if (localStorage.getItem('myLibrary') === null) {
-    myLibrary = [];
+    var myLibrary = [];
   } else {
-    myLibrary = JSON.parse(localStorage.getItem('myLibrary'))
+    var myLibrary = JSON.parse(localStorage.getItem('myLibrary'))
   }
 
+  console.log(myLibrary)
   return myLibrary
-}
-
-function deleteMyLibraryLocalStorage () {
-
 }
