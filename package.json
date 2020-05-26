@@ -1,0 +1,25 @@
+{
+  "name": "JS-Library",
+  "version": "1.0.0",
+  "description": "- JavaScript ## Usage > Clone the repository to your local machine using ssh: ``` $ git clone git@github.com:leonmezu1/JS-Library.git ``` > Clone the repository to your local machine using https: ``` $ git clone https://github.com/leonmezu1/JS-Library.git ``` > cd into the directory ``` $ cd JS-Library ``` > Run Server Locally",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leonmezu1/JS-Library.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leonmezu1/JS-Library/issues"
+  },
+  "homepage": "https://github.com/leonmezu1/JS-Library#readme",
+  "devDependencies": {
+    "eslint": "^7.1.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2"
+  }
+}
